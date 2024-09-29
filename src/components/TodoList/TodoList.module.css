@@ -1,0 +1,67 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.title,
+.list__container {
+    width: 70%;
+    margin: 50px auto;
+}
+
+.list__container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input {
+    display: block;
+    border: none;
+    background: none;
+    border-bottom: 1px solid gray;
+    width: 90%;
+    font-size: 20px;
+
+    color: white;
+}
+
+.input:focus {
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
+
+.add {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+}
+
+.buttons_container {
+    width: 100%;
+    margin-top: 60px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.deleteAll,
+.completeAll,
+.deleteCompleted {
+    width: 20%;
+    height: 35px;
+
+    background-color: #4caf50;
+    border: none;
+    border-radius: 5px;
+
+    color: white;
+
+    margin: 0 auto;
+}

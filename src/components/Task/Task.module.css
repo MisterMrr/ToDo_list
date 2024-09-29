@@ -1,0 +1,29 @@
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 70%;
+    margin: 10px auto;
+}
+
+.task__label {
+    display: flex;
+    flex-direction: row;
+}
+
+.task__text {
+    margin-left: 10px;
+}
+
+.task__delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    fill: #000; /* Цвет иконки */
+}

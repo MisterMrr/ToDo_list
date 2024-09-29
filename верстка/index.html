@@ -6,5 +6,28 @@
         <link rel="stylesheet" href="style.css" />
         <title>ToDo</title>
     </head>
-    <body></body>
+    <body>
+        <div class="list">
+            <h1 class="title">ToDo List</h1>
+            <input class="input" type="text" />
+
+            <div class="task">
+                <label for="task__checkbox" class="task__label">
+                    <input
+                        id="task__checkbox"
+                        name="task__checkbox"
+                        class="task__checkbox"
+                        type="checkbox" />
+
+                    <span class="custom-checkbox"></span>
+                    <p class="task__text">Задача 1</p>
+                </label>
+                <button class="task__delete">
+                    <svg class="icon">
+                        <use xlink:href="sprite.svg#icon-basket"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </body>
 </html>
