@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Task from "../Task/Task";
 
 import style from "./TodoList.module.css";
@@ -7,7 +7,16 @@ import sprite from "../../assets/sprite.svg";
 
 function Todolist() {
     const [input, setInput] = useState("");
-    const [taskList, setTaskList] = useState([]);
+    const [taskList, setTaskList] = useState(() => {
+        // Попытка загрузить задачи из localStorage
+        const storedTasks = localStorage.getItem("taskList");
+        return storedTasks ? JSON.parse(storedTasks) : []; // Возвращаем массив задач или пустой массив
+    });
+
+    useEffect(() => {
+        console.log("Updating localStorage with tasks:", taskList);
+        localStorage.setItem("taskList", JSON.stringify(taskList));
+    }, [taskList]);
 
     function handleInputChange(e) {
         setInput(e.target.value);
@@ -23,29 +32,26 @@ function Todolist() {
     function addTask() {
         if (input !== "") {
             setTaskList((prev) => {
-                setInput("");
-
                 return [
                     ...prev,
                     {
-                        id: prev.length + 1,
+                        id: prev.length ? prev[prev.length - 1].id + 1 : 1,
                         text: input,
                         completed: false,
                     },
                 ];
             });
+            setInput("");
         }
     }
 
     // Удаление
     function deleteTask(id) {
-        return setTaskList((prev) =>
-            prev.filter((taskList) => taskList.id !== id)
-        );
+        setTaskList((prev) => prev.filter((taskList) => taskList.id !== id));
     }
 
     function deleteCompleted() {
-        return setTaskList((prev) =>
+        setTaskList((prev) =>
             prev.filter((taskList) => taskList.completed === false)
         );
     }
@@ -75,7 +81,7 @@ function Todolist() {
         <>
             <div className={style.list}>
                 <h1 className={style.title}>ToDo List</h1>
-                <div class={style.list__container}>
+                <div className={style.list__container}>
                     <input
                         className={style.input}
                         onChange={handleInputChange}
@@ -83,7 +89,7 @@ function Todolist() {
                         type="text"
                         value={input}
                     />
-                    <button class={style.add} onClick={addTask}>
+                    <button className={style.add} onClick={addTask}>
                         <svg className={style.icon}>
                             <use href={`${sprite}#add`}></use>
                         </svg>
@@ -101,14 +107,16 @@ function Todolist() {
                 />
             ))}
 
-            <div class={style.buttons_container}>
-                <button class={style.completeAll} onClick={completeAll}>
+            <div className={style.buttons_container}>
+                <button className={style.completeAll} onClick={completeAll}>
                     Выполнить все
                 </button>
-                <button class={style.deleteAll} onClick={deleteAll}>
+                <button className={style.deleteAll} onClick={deleteAll}>
                     Удалить все
                 </button>
-                <button class={style.deleteCompleted} onClick={deleteCompleted}>
+                <button
+                    className={style.deleteCompleted}
+                    onClick={deleteCompleted}>
                     Удалить выполненные
                 </button>
             </div>
